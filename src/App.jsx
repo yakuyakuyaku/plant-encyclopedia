@@ -1020,12 +1020,12 @@ export default function PlantEncyclopediaApp() {
                               e.stopPropagation();
                               setSelectedPlant(plant);
                             }}
-                            className="relative flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-white/80"
+                            className="relative flex h-4 w-4 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-white/80"
                             aria-label={h.label || plant.japanese_name}
                             title={h.label || plant.japanese_name}
                           >
                             <span className="absolute inset-0 rounded-full border-2 border-white bg-emerald-500/85 shadow-[0_8px_20px_rgba(0,0,0,0.28)] ring-4 ring-emerald-400/30" />
-                            <span className="relative z-10 h-2.5 w-2.5 rounded-full bg-white" />
+                            <span className="relative z-10 h-1 w-1 rounded-full bg-white" />
                           </button>
                         </div>
                       );
