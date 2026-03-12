@@ -966,6 +966,7 @@ export default function PlantEncyclopediaApp() {
               </div>
 
               <div className="mb-3 flex flex-wrap gap-2 text-xs text-slate-500">
+                <span className="rounded-full bg-emerald-50 px-3 py-1 text-emerald-700 ring-1 ring-emerald-200">緑のマーカー = ホットスポット</span>
                 <span className="rounded-full bg-slate-100 px-3 py-1">
                   地域: {currentPhoto?.region || "—"}
                 </span>
@@ -1019,11 +1020,12 @@ export default function PlantEncyclopediaApp() {
                               e.stopPropagation();
                               setSelectedPlant(plant);
                             }}
-                            className="relative h-11 w-11 rounded-full bg-transparent opacity-[0.02] focus:opacity-100 focus:outline-none active:opacity-100"
+                            className="relative flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-white/80"
                             aria-label={h.label || plant.japanese_name}
                             title={h.label || plant.japanese_name}
                           >
-                            <span className="absolute inset-0 rounded-full" />
+                            <span className="absolute inset-0 rounded-full border-2 border-white bg-emerald-500/85 shadow-[0_8px_20px_rgba(0,0,0,0.28)] ring-4 ring-emerald-400/30" />
+                            <span className="relative z-10 h-2.5 w-2.5 rounded-full bg-white" />
                           </button>
                         </div>
                       );
@@ -1032,7 +1034,7 @@ export default function PlantEncyclopediaApp() {
                     <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/45 to-transparent p-4 text-white">
                       <div className="text-sm font-medium">写真タップで植物を探す</div>
                       <div className="mt-1 text-xs text-white/85">
-                        見えないホットスポットに触れると植物名が表示されます
+                        緑のマーカーをクリックすると植物詳細が開きます
                       </div>
                     </div>
                   </div>
@@ -1048,7 +1050,7 @@ export default function PlantEncyclopediaApp() {
                       写真連動
                     </span>
                   </div>
-                  <div className="max-h-[320px] space-y-2 overflow-y-auto pr-1">
+                  <div className="max-h-[300px] space-y-2 overflow-y-auto pr-1">
                     {filteredHotspots.length ? (
                       filteredHotspots.map((h, idx) => {
                         const plant = plantMap[h.plantId];
@@ -1087,6 +1089,9 @@ export default function PlantEncyclopediaApp() {
                 <h2 className="text-lg font-bold">参考写真一覧</h2>
                 <div className="text-sm text-slate-500">{filteredPhotos.length}件</div>
               </div>
+              <div className="mb-4 rounded-2xl bg-slate-50 px-3 py-2 text-sm text-slate-500 ring-1 ring-slate-200">
+                サムネイルをクリックすると、その写真が上部のメイン表示に切り替わります。
+              </div>
 
               {filteredPhotos.length ? (
                 <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
@@ -1107,8 +1112,7 @@ export default function PlantEncyclopediaApp() {
                           <img
                             src={normalizeImageUrl(photo.image_url)}
                             alt={photo.title}
-                            className="absolute inset-0 h-full w-full object-contain"
-                        loading="lazy"
+                            className="absolute inset-0 h-full w-full object-cover"
                             loading="lazy"
                           />
                         </div>
@@ -1365,7 +1369,7 @@ export default function PlantEncyclopediaApp() {
                 <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-slate-500">
                   <ImageIcon className="h-4 w-4" /> 使われている実例写真
                 </div>
-                <div className="max-h-[320px] space-y-2 overflow-y-auto pr-1">
+                <div className="max-h-[300px] space-y-2 overflow-y-auto pr-1">
                   {(plantPhotoMap[selectedPlant.plant_id] || []).length ? (
                     plantPhotoMap[selectedPlant.plant_id].map((photo) => (
                       <button
